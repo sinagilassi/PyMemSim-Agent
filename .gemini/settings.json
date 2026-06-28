@@ -1,0 +1,12 @@
+{
+	"mcpServers": {
+		"pymemsim_mcp": {
+			"command": "uvx",
+			"args": [
+				"pymemsim-mcp",
+				"--mode",
+				"stdio"
+			]
+		}
+	}
+}
