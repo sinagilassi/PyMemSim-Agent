@@ -1,0 +1,3 @@
+[mcp_servers.pymemsim_mcp]
+command = "uvx"
+args = ["pymemsim-mcp", "--mode", "stdio"]
