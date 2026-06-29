@@ -96,6 +96,62 @@ LLM explains the result
 
 ---
 
+## Discovered MCP Interface
+
+The configured PyMemSim MCP server is:
+
+```text
+server name: pymemsim_mcp
+command: uvx pymemsim-mcp --mode stdio
+```
+
+Agents should treat this server as the operational simulation interface when it is available. The currently exposed useful resources are:
+
+```text
+pymemsim://references/gas-phase-requirements
+pymemsim://references/liquid-phase-requirements
+```
+
+Agents should read the phase-specific requirements resource before preparing `reference_content`.
+
+For gas-phase PyMemSim calculations, `reference_content` must include:
+
+- `general-data`
+- `ideal-gas-heat-capacity` with symbol `Cp_IG`
+- `vapor-pressure` with symbol `VaPr`
+
+The `general-data` table must include:
+
+- `No.`
+- `Name`
+- `Formula`
+- `State`
+- `critical-temperature`
+- `critical-pressure`
+- `critical-molar-volume`
+- `molecular-weight`
+- `acentric-factor`
+- `enthalpy-of-formation`
+- `gibbs-energy-of-formation`
+
+For liquid-phase PyMemSim calculations, `reference_content` must include all gas-phase requirements and additionally:
+
+- `liquid-heat-capacity` with symbol `Cp_LIQ`
+- `liquid-density` with symbol `rho_LIQ`
+- `enthalpy-of-vaporization` with symbol `EnVap`
+
+The currently exposed PyMemSim MCP tools are:
+
+```text
+simulate_gas_hfm
+hfm_feed_flow_rate_analyzer
+check_yaml_reference
+```
+
+Before running a PyMemSim simulation, validate generated `reference_content` with `check_yaml_reference` when that tool is available. Use `hfm_feed_flow_rate_analyzer` before a full hollow-fiber membrane simulation when feed-flow bounds need to be estimated from geometry, operating conditions, viscosity, and permeance.
+
+---
+
 ## Responsibilities of Each Component
 
 ### 1. PyMemSim-MCP
@@ -216,7 +272,7 @@ The agent must not modify the scientific meaning of PyMemSim inputs or outputs.
 
 ## Simulation Input Rules
 
-The agent should distinguish between two classes of inputs.
+The agent should distinguish between two agent-facing input classes.
 
 ### Conventional Inputs
 
@@ -235,9 +291,9 @@ These are normal process and membrane simulation variables, such as:
 - flow pattern
 - solver options
 
-### Model-Source Reference Inputs
+### Thermodynamic Reference Inputs
 
-These are structured scientific definitions supplied as `reference_content`, such as:
+These are structured scientific definitions supplied only as `reference_content`, such as:
 
 - component thermodynamic data
 - heat capacity equations
@@ -247,9 +303,7 @@ These are structured scientific definitions supplied as `reference_content`, suc
 - units
 - metadata
 
-The agent should not mix these two input classes.
-
-The external input is `reference_content`. The internal runtime object is `model_source`.
+The agent should keep conventional process inputs separate from `reference_content`. The agent should not request, construct, expose, or pass internal runtime objects; those are built inside the MCP/scientific application layer.
 
 ---
 
@@ -257,11 +311,10 @@ The external input is `reference_content`. The internal runtime object is `model
 
 The agent must follow these rules:
 
-1. Do not create the `model_source` manually outside the MCP workflow.
-2. Do not ask the user to provide a pre-built `model_source`.
-3. Prepare or supply `reference_content` instead of constructing runtime model-source objects directly.
-4. Treat `model_source` as an internal object built inside the MCP tool function.
-5. Do not invent thermodynamic data, equation parameters, units, or validity ranges.
+1. Do not request, create, expose, or pass internal runtime model objects.
+2. Prepare or supply `reference_content` as the thermodynamic reference input.
+3. Let the MCP/scientific application layer build all runtime scientific objects internally.
+4. Do not invent thermodynamic data, equation parameters, units, or validity ranges.
 6. Do not silently change or omit units.
 7. Preserve source units in `reference_content`; unit conversion is handled internally by the scientific application layer through PyCUC.
 8. Do not bypass PyThermoDB or PyThermoLinkDB when thermodynamic references need to be transformed into executable model-source objects.
