@@ -1,13 +1,3 @@
 {
-	"servers": {
-		"pymemsim_mcp": {
-			"type": "stdio",
-			"command": "uvx",
-			"args": [
-				"pymemsim-mcp",
-				"--mode",
-				"stdio"
-			]
-		}
-	}
+	"servers": {}
 }
