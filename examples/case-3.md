@@ -1,4 +1,4 @@
-# 📘 Hollow Fiber Membrane (HFM) Input Specification — Case 3 (Air Separation)
+# 📘 Hollow Fiber Membrane (HFM) Input Specification — Case 3
 
 ## 🔷 1. Module (Contactor) Configuration
 
@@ -90,3 +90,36 @@
 | Feed temperature | T | 296.15 | K |
 | Feed pressure | P_f | 690000 | Pa |
 | Permeate pressure | P_p | 100000 | Pa |
+
+## 🔷 Experimental results
+
+### Experimental data for counter-current system
+
+| Stage cut (%) | N₂ mole fraction in retentate, y |
+|---:|---:|
+| 29.6223 | 88.85465 |
+| 34.15468 | 90.16279 |
+| 38.68705 | 91.36628 |
+| 44.83813 | 93.35465 |
+| 51.31295 | 95.13372 |
+| 58.27338 | 96.75581 |
+| 67.82374 | 98.48256 |
+| 81.7446 | 99.5814 |
+
+### Experimental data for co-current system
+
+| Stage cut (%) | N₂ mole fraction in retentate, y |
+|---:|---:|
+| 25.2518 | 86.9186 |
+| 28.32734 | 87.75581 |
+| 31.40288 | 88.64535 |
+| 38.52518 | 90.31977 |
+| 52.1223 | 92.88372 |
+| 56.65468 | 93.61628 |
+| 60.70144 | 94.03488 |
+| 69.92806 | 95.02907 |
+| 81.7446 | 95.9186 |
+
+## References
+
+1. Feng, X., Ivory, J. and Rajan, V.S., 1999. Air separation by integrally asymmetric hollow‐fiber membranes. AIChE journal, 45(10), pp.2142-2152.

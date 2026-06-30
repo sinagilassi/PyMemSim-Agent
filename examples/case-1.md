@@ -1,4 +1,4 @@
-# 📘 Hollow Fiber Membrane (HFM) Input Specification
+# 📘 Hollow Fiber Membrane (HFM) Input Specification - Case 1
 
 ## 🔷 1. Module (Contactor) Configuration
 
@@ -81,7 +81,7 @@
 
 | Parameter | Symbol | Value | Unit |
 |----------|--------|------|------|
-| Feed temperature | T | 298.15~338.15 | K |
+| Feed temperature | T | 298.15 & 338.15 | K |
 | Feed pressure | P_f | 405300 | Pa |
 | Permeate pressure | P_p | 101300 | Pa |
 
@@ -104,3 +104,7 @@
 | 7.008798 | 0.761349 |
 | 13.58751 | 0.761204 |
 | 38.71977 | 0.741621 |
+
+## References
+
+1. Tranchino, L., Santarossa, R., Carta, F., Fabiani, C. and Bimbi, L., 1989. Gas separation in a membrane unit: experimental results and theoretical predictions. Separation Science and Technology, 24(14), pp.1207-1226.
