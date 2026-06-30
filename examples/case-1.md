@@ -76,3 +76,11 @@
 | Definition | Value |
 |-----------|------|
 | α (CO₂/CH₄) | 3.59 |
+
+## 🔷 Feed Operating Conditions
+
+| Parameter | Symbol | Value | Unit |
+|----------|--------|------|------|
+| Feed temperature | T | 298.15~338.15 | K |
+| Feed pressure | P_f | 405300 | Pa |
+| Permeate pressure | P_p | 101300 | Pa |
