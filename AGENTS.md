@@ -17,6 +17,20 @@ The agent must treat scientific data, equations, units, assumptions, and solver 
 
 ---
 
+## Supporting Workflow Files
+
+Harness-neutral operational workflows are stored in the repository-level `workflows/` directory. These files are intended for any agent harness, not only Codex.
+
+Agents should consult the relevant workflow before executing or planning scientific work:
+
+- `workflows/membrane-simulation.md`: use for PyMemSim-MCP membrane simulations, hollow-fiber module analysis, stage-cut, recovery, purity, and flow-profile calculations.
+- `workflows/reference-content-generation.md`: use when YAML `reference_content` must be prepared, completed, or validated for thermodynamic data and equations.
+- `workflows/sensitivity-analysis.md`: use when running or planning multiple PyMemSim-MCP cases to vary feed flow rate, pressure ratio, temperature, composition, permeance, or other conventional inputs.
+
+These workflow files do not replace the rules in this `AGENTS.md`. If there is a conflict, follow `AGENTS.md` as the governing policy and use the workflow files for step-by-step execution details.
+
+---
+
 ## Agent Role
 
 The agent is an engineering workflow orchestrator.
@@ -330,6 +344,8 @@ The agent must follow these rules:
 
 When the user asks for a membrane simulation:
 
+First consult `workflows/membrane-simulation.md`. If required thermodynamic YAML content is missing, also consult `workflows/reference-content-generation.md`.
+
 1. Parse the problem statement.
 2. Identify the membrane system type.
 3. Identify components.
@@ -343,6 +359,38 @@ When the user asks for a membrane simulation:
 11. Allow PyMemSim to execute the deterministic calculation.
 12. Review the returned result.
 13. Explain the engineering meaning of the result.
+
+---
+
+## Preferred Workflow for Reference Content Generation
+
+When the user asks to prepare thermodynamic data, property equations, or YAML `reference_content`, consult `workflows/reference-content-generation.md`.
+
+The agent should:
+
+1. Identify the target simulation and chemical components.
+2. Determine the required thermodynamic properties and equations.
+3. Use `pythermodb-reference-maker` to prepare YAML `reference_content`.
+4. Preserve source units, metadata, equation arguments, parameters, return definitions, and validity ranges when available.
+5. Validate that the generated content is suitable for PyThermoDB and PyThermoLinkDB processing.
+6. Avoid inventing missing thermodynamic constants, coefficients, units, or validity ranges.
+7. Return the YAML as `reference_content`; do not construct or expose `model_source`.
+
+---
+
+## Preferred Workflow for Sensitivity Analysis
+
+When the user asks to compare operating conditions or study parameter effects, consult `workflows/sensitivity-analysis.md`.
+
+The agent should:
+
+1. Establish a complete base case.
+2. Identify one or more intended sensitivity variables.
+3. Keep fixed variables unchanged unless the user explicitly asks otherwise.
+4. Use consistent `reference_content` across cases unless thermodynamic assumptions are intentionally varied.
+5. Run each quantitative case through PyMemSim-MCP when available.
+6. Compare returned results using membrane engineering metrics such as stage-cut, purity, recovery, flow rates, and composition profiles.
+7. Explain trends without implying unsupported causality or LLM-generated numerical results.
 
 ---
 
