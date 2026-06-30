@@ -36,7 +36,6 @@ The agent should identify or collect:
 ## Required Tools / Components
 
 - PyMemSim-MCP
-- PyMemSim
 - `pythermodb-reference-maker`
 - PyThermoDB
 - PyThermoLinkDB
