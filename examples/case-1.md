@@ -84,3 +84,23 @@
 | Feed temperature | T | 298.15~338.15 | K |
 | Feed pressure | P_f | 405300 | Pa |
 | Permeate pressure | P_p | 101300 | Pa |
+
+## 🔷 Experimental results
+
+### Experimental data at 65 °C
+
+| Stage cut (%) | CO₂ mole fraction in permeate, y |
+|---:|---:|
+| 3.064516 | 0.800423 |
+| 6.451613 | 0.798225 |
+| 19.35484 | 0.788125 |
+| 39.35484 | 0.761837 |
+
+### Experimental data at 25 °C
+
+| Stage cut (%) | CO₂ mole fraction in permeate, y |
+|---:|---:|
+| 2.251606 | 0.768977 |
+| 7.008798 | 0.761349 |
+| 13.58751 | 0.761204 |
+| 38.71977 | 0.741621 |
