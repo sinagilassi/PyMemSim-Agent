@@ -1,3 +1,5 @@
+# local configuration file for codex
+
 [mcp_servers.pymemsim_mcp]
 command = "uvx"
 args = ["pymemsim-mcp", "--mode", "stdio"]
