@@ -52,6 +52,10 @@
 | O₂ | 0.205 |
 | N₂ | 0.795 |
 
+- Feed inlet molar flow rates from validation data:
+  - case-3-1: 0.0005, 0.00044, 0.0001, 5e-05, 4.5e-05, 4e-05, 3.5e-05, 3e-05, 2.5e-05, 1e-05 mol/s
+  - case-3-2: 0.0005, 0.00044, 0.0001, 5e-05, 4e-05, 3.5e-05, 3e-05, 2.5e-05, 2.3e-05 mol/s
+
 ---
 
 ## 🔷 3. Physical Properties (at NTP)

@@ -48,6 +48,10 @@
 | CO₂ | 0.60 |
 | CH₄ | 0.40 |
 
+- Feed inlet molar flow rates from validation data:
+  - case-1-1 at 298.15 K: 0.0025, 0.0015, 0.001, 0.0001, 6e-05, 4e-05, 3e-05 mol/s
+  - case-1-2 at 338.15 K: 0.0025, 0.0015, 0.00014, 0.00013, 0.00011, 0.0001, 9e-05, 7e-05 mol/s
+
 ---
 
 ## 🔷 3. Physical Properties (at NTP)
