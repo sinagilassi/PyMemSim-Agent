@@ -221,3 +221,6 @@ __marimo__/
 results/
 results/*
 /results/**
+
+# private
+private/
