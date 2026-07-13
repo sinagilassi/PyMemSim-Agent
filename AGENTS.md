@@ -121,6 +121,8 @@ command: uvx pymemsim-mcp --mode stdio
 
 Agents should treat this server as the operational simulation interface when it is available. MCP resources and tool schemas are the source of truth for current input styles, accepted units, required properties, valid options, and payload structure.
 
+When an agent reads this `AGENTS.md` for a PyMemSim-MCP simulation or reference-preparation task, it must also read the relevant active MCP resources. Those resources contain the current explanations for how to prepare valid inputs.
+
 Do not treat this `AGENTS.md` file as the authoritative schema for MCP tool arguments or `reference_content` requirements. Before preparing a simulation payload, inspect the active MCP resources and tool schemas, then follow those definitions exactly.
 
 Known useful resources include:
