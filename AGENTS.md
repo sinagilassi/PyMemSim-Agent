@@ -119,40 +119,18 @@ server name: pymemsim_mcp
 command: uvx pymemsim-mcp --mode stdio
 ```
 
-Agents should treat this server as the operational simulation interface when it is available. The currently exposed useful resources are:
+Agents should treat this server as the operational simulation interface when it is available. MCP resources and tool schemas are the source of truth for current input styles, accepted units, required properties, valid options, and payload structure.
+
+Do not treat this `AGENTS.md` file as the authoritative schema for MCP tool arguments or `reference_content` requirements. Before preparing a simulation payload, inspect the active MCP resources and tool schemas, then follow those definitions exactly.
+
+Known useful resources include:
 
 ```text
 pymemsim://references/gas-phase-requirements
 pymemsim://references/liquid-phase-requirements
 ```
 
-Agents should read the phase-specific requirements resource before preparing `reference_content`.
-
-For gas-phase PyMemSim calculations, `reference_content` must include:
-
-- `general-data`
-- `ideal-gas-heat-capacity` with symbol `Cp_IG`
-- `vapor-pressure` with symbol `VaPr`
-
-The `general-data` table must include:
-
-- `No.`
-- `Name`
-- `Formula`
-- `State`
-- `critical-temperature`
-- `critical-pressure`
-- `critical-molar-volume`
-- `molecular-weight`
-- `acentric-factor`
-- `enthalpy-of-formation`
-- `gibbs-energy-of-formation`
-
-For liquid-phase PyMemSim calculations, `reference_content` must include all gas-phase requirements and additionally:
-
-- `liquid-heat-capacity` with symbol `Cp_LIQ`
-- `liquid-density` with symbol `rho_LIQ`
-- `enthalpy-of-vaporization` with symbol `EnVap`
+Agents must read the phase-specific requirements resource before preparing `reference_content`. If the resource content differs from examples, workflows, or historical notes in this repository, the active MCP resource wins.
 
 The currently exposed PyMemSim MCP tools are:
 
@@ -163,6 +141,20 @@ check_yaml_reference
 ```
 
 Before running a PyMemSim simulation, validate generated `reference_content` with `check_yaml_reference` when that tool is available. Use `hfm_feed_flow_rate_analyzer` before a full hollow-fiber membrane simulation when feed-flow bounds need to be estimated from geometry, operating conditions, viscosity, and permeance.
+
+If `hfm_feed_flow_rate_analyzer` returns `null` without diagnostics, do not invent a recommended flow rate. Use an explicitly provided or literature validation feed flow when available; otherwise report that the feed-flow bound could not be estimated and ask for a usable feed flow or revised analyzer inputs.
+
+### MCP Schema and Unit Policy
+
+For `simulate_gas_hfm` and related tools, get the current input format from the active MCP tool schema and resources. Historical notes in this repository may explain past failures, but they must not override the live MCP interface.
+
+Use these stable policies when preparing MCP payloads:
+
+- Keep conventional process inputs separate from `reference_content`.
+- Use the component ids, field names, option names, unit strings, and nested object shapes specified by the active MCP tool schema.
+- Use registered PyCUC exponent notation such as `m2`, `m3`, `ft2`, or `ft3`; avoid caret notation such as `m^2`, `m^3`, `ft^2`, or `ft^3`.
+- Validate `reference_content` and the conventional simulation payload separately; `reference_content` validation can pass while later conventional inputs still fail schema validation or unit conversion.
+- If local examples or error reports disagree with the MCP resource or schema, follow the MCP resource or schema and update the local documentation if needed.
 
 ---
 
