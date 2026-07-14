@@ -1,5 +1,7 @@
 # PyMemSim-Agent
 
+![PyMemSim-Agent](https://drive.google.com/uc?export=view&id=1FsAc9xSPgdPoz_HH4f4ZkyYukjNRoxir)
+
 PyMemSim-Agent is a harness-neutral instruction and workflow repository for AI-assisted chemical-engineering membrane simulation. It is designed to give Codex, Claude, Gemini, and other AI coding or research agents the same scientific rules, workflow files, examples, and thermodynamic-reference skill needed to orchestrate reproducible PyMemSim-MCP simulations.
 
 The repository does not implement the membrane solver itself. Instead, it defines how an AI agent should prepare structured inputs, validate thermodynamic references, call the PyMemSim MCP tools, and report results without inventing scientific data or bypassing the deterministic simulation backend.
