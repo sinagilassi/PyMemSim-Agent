@@ -93,7 +93,7 @@
 |----------|--------|------|------|
 | Feed temperature | T | 296.15 | K |
 | Feed pressure | P_f | 690000 | Pa |
-| Permeate pressure | P_p | 100000 | Pa |
+| Permeate pressure | P_p | 101300 | Pa |
 
 ## 🔷 Experimental results
 
